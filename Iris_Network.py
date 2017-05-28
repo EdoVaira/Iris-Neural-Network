@@ -8,7 +8,7 @@ np.random.seed(123)
 dtype = torch.FloatTensor
 
 # Open the CSV File
-path = 'Put your path here'
+path = 'Iris_Dataset'
 file = open(path, newline='')
 reader = csv.reader(file)
 
