@@ -62,7 +62,7 @@ y = Variable(y.type(dtype), requires_grad=False)
 w1 = Variable(torch.randn(D_in, H).type(dtype), requires_grad=True)
 w2 = Variable(torch.randn(H, D_out).type(dtype), requires_grad=True)
 
-learning_rate = 1e-6
+learning_rate = 1e-5
 for t in range(500):
   # Forward pass: compute predicted y using operations on Variables; these
   # are exactly the same operations we used to compute the forward pass using
