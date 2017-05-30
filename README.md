@@ -16,4 +16,4 @@ The columns in this dataset are:
 - PetalWidthCm
 - Species
 
-<img src='http://imgur.com/a/5gp5M'>
+<img src='https://ibb.co/jC2aVv'>
