@@ -21,3 +21,5 @@ The columns in this dataset are:
 <hr></hr>
 
 <b>Graph:</b>
+
+<img width=426 height=320 src='https://preview.ibb.co/egVhca/Figure_1.png'>
