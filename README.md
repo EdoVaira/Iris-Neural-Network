@@ -16,4 +16,4 @@ The columns in this dataset are:
 - PetalWidthCm
 - Species
 
-<img src='https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAgqAAAAJDU5ZjM1YTVkLTNmYzUtNGNmZS05ZmJmLTk4ZjU2YWU0MDY2Zg.png'>
+<img src='http://imgur.com/a/5gp5M'>
