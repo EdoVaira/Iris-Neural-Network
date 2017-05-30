@@ -19,3 +19,5 @@ The columns in this dataset are:
 <img src='https://preview.ibb.co/ewf7ca/Schermata_2017_05_30_alle_22_48_18.png'>
 
 <hr></hr>
+
+<b>Graph:</b>
