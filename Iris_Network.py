@@ -1,100 +1,74 @@
-# Dependencies
 import csv
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
+import random
 import numpy as np
-np.random.seed(123)
-dtype = torch.FloatTensor
 
-# Open the CSV File
-path = 'Iris_Dataset.csv'
-file = open(path, newline='')
-reader = csv.reader(file)
+class Network(torch.nn.Module):
 
-# Skip the header ( Id,SepalLengthCm,SepalWidthCm... )
-header = next(reader)
+    def __init__(self):
+        super(Network,self).__init__()
+        self.dense_input = nn.Linear(4,16)
+        self.dense_hidde = nn.Linear(16,7)
+        self.dense_outpt = nn.Linear(7,3)
 
-X = []
-y = []
+    def forward(self,x):
+        x =  F.relu(self.dense_input(x))
+        x =  F.relu(self.dense_hidde(x))
+        x =  self.dense_outpt(x)  #F.log_softmax si può non mettere se come cost function si usa CrossEntropyLoss.
+        return x
 
-# Load the data in X and y
-    # Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
-    # Iris-setosa
-    # Iris-versicolor
-    # Iris-virginica
-for row in reader:
+def loadData():
+    path = 'Iris_Dataset.csv'
+    file = open(path, newline='')
+    reader = csv.reader(file)
 
-    Id = int(row[0])
-    SepalLengthCm = float(row[1])
-    SepalWidthCm = float(row[2])
-    PetalLengthCm = float(row[3])
-    PetalWidthCm = float(row[4])
-    X.append([SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm])
+    # Skip the header ( Id,SepalLengthCm,SepalWidthCm... )
+    header = next(reader)
 
-    # One Hot Encoding
-    if row[5] == 'Iris-setosa':
-        y.append([0,0,1])
-    elif row[5] == 'Iris-versicolor':
-        y.append([0,1,0])
-    elif row[5] == 'Iris-virginica':
-        y.append([1,0,0])
+    X = []
+    y = []
 
-# Converting X and y to 2 Torch Tensors
-X = torch.Tensor(X)
-y = torch.Tensor(y)
+    for row in reader:
+        X.append([float(row[1]), float(row[2]), float(row[3]), float(row[4])])
 
-# Neural Network
-
-# N is batch size; D_in is input dimension;
-# H is hidden dimension; D_out is output dimension.
-N, D_in, H, D_out = 64, 4, 10, 3
-
-# Create Tensors to hold input (X) and outputs (y), and wrap them in Variables.
-# Setting requires_grad=False indicates that we do not need to compute gradients
-# with respect to these Variables during the backward pass.
-X = Variable(X.type(dtype), requires_grad=False)
-y = Variable(y.type(dtype), requires_grad=False)
-
-# Create random Tensors for weights, and wrap them in Variables.
-# Setting requires_grad=True indicates that we want to compute gradients with
-# respect to these Variables during the backward pass.
-w1 = Variable(torch.randn(D_in, H).type(dtype), requires_grad=True)
-w2 = Variable(torch.randn(H, D_out).type(dtype), requires_grad=True)
-
-learning_rate = 1e-5
-for t in range(500):
-  # Forward pass: compute predicted y using operations on Variables; these
-  # are exactly the same operations we used to compute the forward pass using
-  # Tensors, but we do not need to keep references to intermediate values since
-  # we are not implementing the backward pass by hand.
-  y_pred = X.mm(w1).clamp(min=0).mm(w2)
-  F.log_softmax(y_pred)
-
-  # Compute and print loss using operations on Variables.
-  # Now loss is a Variable of shape (1,) and loss.data is a Tensor of shape
-  # (1,); loss.data[0] is a scalar value holding the loss.
-  loss = (y_pred - y).pow(2).sum()
-  print(t, '|', 'Loss :', loss.data[0])
-
-  # Use autograd to compute the backward pass. This call will compute the
-  # gradient of loss with respect to all Variables with requires_grad=True.
-  # After this call w1.grad and w2.grad will be Variables holding the gradient
-  # of the loss with respect to w1 and w2 respectively.
-  loss.backward()
-
-  # Update weights using gradient descent; w1.data and w2.data are Tensors,
-  # w1.grad and w2.grad are Variables and w1.grad.data and w2.grad.data are
-  # Tensors.
-  w1.data -= learning_rate * w1.grad.data
-  w2.data -= learning_rate * w2.grad.data
-
-  # Manually zero the gradients
-  w1.grad.data.zero_()
-  w2.grad.data.zero_()
+        if row[5] == 'Iris-setosa':
+            y.append([0])
+        elif row[5] == 'Iris-versicolor':
+            y.append([1])
+        elif row[5] == 'Iris-virginica':
+            y.append([2])
 
 
-# new = [[New Data Here]]
-# new = torch.Tensor(new)
-# new = Variable(new)
-# print(new.mm(w1).mm(w2))
+    # Converting X and y to 2 Torch Tensors
+    X = torch.Tensor(X)
+    y = torch.LongTensor(y)
+
+    X = Variable(X.view(150,1,4))
+    Y = Variable(y)
+    return X,Y
+
+
+
+X,Y = loadData()
+print(X[0],Y[0])
+net = Network()
+#Training:
+crit  = nn.CrossEntropyLoss()            #Softmax più CrossEntropyLoss
+optim = torch.optim.SGD(net.parameters(),lr=.01)
+
+for i in range(200):
+    avg_loss = 0
+    for t in range(len(Y)):
+        x = X[t]
+        p = net(x)
+        loss = crit(p,Y[t])
+        optim.zero_grad()
+        loss.backward()
+        optim.step()
+        avg_loss += loss.data[0]
+    print("Average Loss:{}".format(avg_loss/len(X)))
+
+print("Real:{} Net:{}".format(Y[17],net(X[17])[0]))
