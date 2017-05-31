@@ -17,9 +17,3 @@ The columns in this dataset are:
 - Species
 
 <img src='https://preview.ibb.co/ewf7ca/Schermata_2017_05_30_alle_22_48_18.png'>
-
-<hr></hr>
-
-<b>Graph:</b>
-
-<img width=426 height=320 src='https://preview.ibb.co/egVhca/Figure_1.png'>
