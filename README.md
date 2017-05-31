@@ -18,4 +18,4 @@ The columns in this dataset are:
 - PetalWidthCm
 - Species
 
-<img src='https://sebastianraschka.com/images/blog/2014/linear-discriminant-analysis/iris_petal_sepal.png'>
+<img width=180 src='https://sebastianraschka.com/images/blog/2014/linear-discriminant-analysis/iris_petal_sepal.png'>
