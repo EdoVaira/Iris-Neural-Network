@@ -1,6 +1,8 @@
 # Iris-Neural-Network
 Neural Network for the Iris Dataset using TensorFlow
 
+<img src='https://s10.postimg.org/ooyqhpa0p/Iris.jpg'>
+
 <h1>Description</h1>
 
 The Iris dataset was used in R.A. Fisher's classic 1936 paper, The Use of Multiple Measurements in Taxonomic Problems, and can also be found on the UCI Machine Learning Repository.
@@ -16,4 +18,4 @@ The columns in this dataset are:
 - PetalWidthCm
 - Species
 
-<img src='https://preview.ibb.co/ewf7ca/Schermata_2017_05_30_alle_22_48_18.png'>
+<img src='https://sebastianraschka.com/images/blog/2014/linear-discriminant-analysis/iris_petal_sepal.png'>
