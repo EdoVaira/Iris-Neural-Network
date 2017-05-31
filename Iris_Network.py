@@ -35,11 +35,11 @@ for row in reader:
     X.append([SepalLengthCm, SepalWidthCm, PetalLengthCm, PetalWidthCm])
 
     if row[5] == 'Iris-setosa':
-        y.append(1)
-    elif row[5] == 'Iris-versicolor':
-        y.append(2)
-    elif row[5] == 'Iris-virginica':
         y.append(3)
+    elif row[5] == 'Iris-versicolor':
+        y.append(6)
+    elif row[5] == 'Iris-virginica':
+        y.append(9)
 
 X = np.array(X)
 y = np.array(y)
