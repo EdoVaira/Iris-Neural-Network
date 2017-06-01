@@ -72,11 +72,11 @@ b1 = tf.Variable(tf.random_normal(shape=[hidden_layer_nodes]))   # First Bias
 w2 = tf.Variable(tf.random_normal(shape=[hidden_layer_nodes,3])) # Hidden layer -> Outputs
 b2 = tf.Variable(tf.random_normal(shape=[3]))   # Second Bias
 
-# Declare model operations
+# Operations
 hidden_output = tf.nn.sigmoid(tf.add(tf.matmul(X_data, w1), b1))
 final_output = tf.nn.softmax(tf.add(tf.matmul(hidden_output, w2), b2))
 
-# Cross entropy cost/loss
+# Cost Function
 cost = tf.reduce_mean(-tf.reduce_sum(y_target * tf.log(final_output), axis=0))
 
 # Optimizer
