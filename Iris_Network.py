@@ -72,7 +72,7 @@ w2 = tf.Variable(tf.random_uniform(shape=[hidden_neurons, 3])) # ( Weights ) Hi
 b2 = tf.Variable(tf.random_uniform(shape=[3])) # ( Second Bias )
 
 # Declare model operations
-hidden_output = tf.nn.sigmoid(tf.add(tf.matmul(X, w1), b1)) # Activation Function : Sigmoid
+hidden_output = tf.nn.sigmoid(tf.add(tf.matmul(X_data, w1), b1)) # Activation Function : Sigmoid
 final_output = tf.nn.softmax(tf.add(tf.matmul(hidden_output, w2), b2)) # Activation Function : Softmax
 
 # Declare loss function ( Mean squared error )
