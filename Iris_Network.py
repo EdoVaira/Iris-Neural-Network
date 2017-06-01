@@ -52,3 +52,6 @@ X_test = X_values[-20:]
 X_train = X_values[:-20]
 y_test = y_values[-20:]
 y_train = y_values[:-20]
+
+# Session
+sess = tf.Session()
