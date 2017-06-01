@@ -18,4 +18,10 @@ The columns in this dataset are:
 - PetalWidthCm
 - Species
 
-<img width=180 src='https://sebastianraschka.com/images/blog/2014/linear-discriminant-analysis/iris_petal_sepal.png'>
+<img width=160 src='https://sebastianraschka.com/images/blog/2014/linear-discriminant-analysis/iris_petal_sepal.png'>
+
+<h1>Accuracy</h1>
+
+This Neural Network reaches 99% of Accuracy
+
+<img width=340 src='https://s21.postimg.org/vx9q7zh07/Accuracy.jpg'>
