@@ -56,8 +56,9 @@ y_train = y_values[:-20]
 # Session
 sess = tf.Session()
 
-# Batch size
+# Batch size / Epochs
 batch_size = 50
+epoch = 500
 
 # Initialize placeholders
 X_data = tf.placeholder(shape=[None, 4], dtype=tf.float32)
@@ -87,7 +88,6 @@ init = tf.global_variables_initializer()
 sess.run(init)
 
 # Training
-epoch = 500
 for i in range(1, (epoch + 1)):
     sess.run(optimizer, feed_dict={X_data: X_train, y_target: y_train})
     if i % 50 == 0:
