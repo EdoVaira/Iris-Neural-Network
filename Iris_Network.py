@@ -76,7 +76,7 @@ hidden_output = tf.nn.sigmoid(tf.add(tf.matmul(X_data, w1), b1)) # Activation F
 final_output = tf.nn.softmax(tf.add(tf.matmul(hidden_output, w2), b2)) # Activation Function : Softmax
 
 # Declare loss function ( Mean squared error )
-loss = tf.reduce_mean(tf.square(y_values - final_output))
+loss = tf.reduce_mean(tf.square(y_data - final_output))
 
 # Declare optimizer
 my_opt = tf.train.GradientDescentOptimizer(0.005)
@@ -93,12 +93,12 @@ for i in range(500):
     rand_index = np.random.choice(len(X_train), size=batch)
     rand_x = X_train[rand_index]
     rand_y = np.transpose([y_train[rand_index]])
-    sess.run(train_step, feed_dict={X_data: X_values, y_data: y_values})
+    sess.run(train_step, feed_dict={X_data: rand_x, y_data: rand_y})
 
     temp_loss = sess.run(loss, feed_dict={X_data: rand_x, y_data: rand_y})
     loss_vec.append(np.sqrt(temp_loss))
 
-    test_temp_loss = sess.run(loss, feed_dict={X_data: x_train, y_values: np.transpose([y_test])})
+    test_temp_loss = sess.run(loss, feed_dict={X_data: X_test, y_data: np.transpose([y_test])})
     test_loss.append(np.sqrt(test_temp_loss))
     if (i+1)%50==0:
         print('Generation: ' + str(i+1) + '. Loss = ' + str(temp_loss))
