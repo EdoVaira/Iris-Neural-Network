@@ -56,9 +56,50 @@ y_train = y_values[:-20]
 # Session
 sess = tf.Session()
 
-# Declare batch size
+# Batch size
 batch_size = 50
 
 # Initialize placeholders
 X_data = tf.placeholder(shape=[None, 4], dtype=tf.float32)
 y_target = tf.placeholder(shape=[None, 1], dtype=tf.float32)
+
+# Hidden neurons
+hidden_layer_nodes = 8
+# Create variables for Neural Network layers
+w1 = tf.Variable(tf.random_normal(shape=[4,hidden_layer_nodes])) # Inputs -> Hidden Layer
+b1 = tf.Variable(tf.random_normal(shape=[hidden_layer_nodes]))   # First Bias
+w2 = tf.Variable(tf.random_normal(shape=[hidden_layer_nodes,3])) # Hidden layer -> Outputs
+b2 = tf.Variable(tf.random_normal(shape=[3]))   # Second Bias
+
+
+# Declare model operations
+hidden_output = tf.nn.sigmoid(tf.add(tf.matmul(X_data, w1), b1))
+final_output = tf.nn.softmax(tf.add(tf.matmul(hidden_output, w2), b2))
+
+# Declare loss function (MSE)
+loss = tf.reduce_mean(tf.square(y_target - final_output))
+
+# Declare optimizer
+my_opt = tf.train.GradientDescentOptimizer(0.005)
+train_step = my_opt.minimize(loss)
+
+# Initialize variables
+init = tf.global_variables_initializer()
+sess.run(init)
+
+# Training loop
+loss_vec = []
+test_loss = []
+for i in range(500):
+    rand_index = np.random.choice(len(X_train), size=batch_size)
+    rand_x = X_train[rand_index]
+    rand_y = np.transpose([y_train[rand_index]])
+    sess.run(train_step, feed_dict={x_data: rand_x, y_target: rand_y})
+
+    temp_loss = sess.run(loss, feed_dict={x_data: rand_x, y_target: rand_y})
+    loss_vec.append(np.sqrt(temp_loss))
+    
+    test_temp_loss = sess.run(loss, feed_dict={x_data: X_test, y_target: np.transpose([y_test])})
+    test_loss.append(np.sqrt(test_temp_loss))
+    if (i+1)%50==0:
+        print('Generation: ' + str(i+1) + '. Loss = ' + str(temp_loss))
