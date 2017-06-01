@@ -55,3 +55,10 @@ y_train = y_values[:-20]
 
 # Session
 sess = tf.Session()
+
+# Declare batch size
+batch_size = 50
+
+# Initialize placeholders
+X_data = tf.placeholder(shape=[None, 4], dtype=tf.float32)
+y_target = tf.placeholder(shape=[None, 1], dtype=tf.float32)
