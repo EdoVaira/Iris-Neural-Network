@@ -24,4 +24,4 @@ The columns in this dataset are:
 
 This Neural Network reaches 99% of Accuracy
 
-<img width=340 src='https://s21.postimg.org/vx9q7zh07/Accuracy.jpg'>
+<img width=340 src='https://s13.postimg.org/6hn9onp53/68747470733a2f2f7332312e706f7374696d672e6f72672f.jpg'>
