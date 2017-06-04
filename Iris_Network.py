@@ -35,7 +35,7 @@ sess = tf.Session()
 
 # Interval / Epochs
 interval = 20
-epoch = 300
+epoch = 400
 
 # Initialize placeholders
 X_data = tf.placeholder(shape=[None, 4], dtype=tf.float32)
