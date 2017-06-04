@@ -34,8 +34,8 @@ y_train = y_values[:-test_size]
 sess = tf.Session()
 
 # Interval / Epochs
-interval = 20
-epoch = 400
+interval = 50
+epoch = 500
 
 # Initialize placeholders
 X_data = tf.placeholder(shape=[None, 4], dtype=tf.float32)
