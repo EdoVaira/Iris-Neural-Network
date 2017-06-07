@@ -60,7 +60,7 @@ final_output = tf.nn.softmax(tf.add(tf.matmul(hidden_output, w2), b2))
 loss = tf.reduce_mean(-tf.reduce_sum(y_target * tf.log(final_output), axis=0))
 
 # Optimizer
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(loss)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)
 
 # Initialize variables
 init = tf.global_variables_initializer()
